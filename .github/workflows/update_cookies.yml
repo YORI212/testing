@@ -2,11 +2,11 @@ name: Update Cookies
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # runs every 10 minutes
-  workflow_dispatch:  # lets you run manually in GitHub UI
+    - cron: '*/10 * * * *'   # Every 10 minutes
+  workflow_dispatch:          # Allow manual run
 
 jobs:
-  update_cookies:
+  update-cookies:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,11 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.10
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run update_cookies.py
         run: python update_cookies.py
